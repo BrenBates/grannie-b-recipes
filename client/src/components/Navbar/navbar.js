@@ -1,41 +1,20 @@
-import React, { useState } from 'react';
-import { Link } from "react-router-dom";
-import "../Navbar/navbar.css";
-import {
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink,
-  NavbarText
-} from 'reactstrap';
+// src/components/NavBar.js
 
-const NavbarPage = (props) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const toggle = () => setIsOpen(!isOpen);
+import React from "react";
+import { useAuth0 } from "../../react-auth0-spa";
+
+const NavBar = () => {
+  const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
+
   return (
     <div>
-          <Navbar scrolling dark expand="md" fixed='top'>
-            <NavbarBrand className="brand" href="/">FRC</NavbarBrand>
+      {!isAuthenticated && (
+        <button onClick={() => loginWithRedirect({})}>Log in</button>
+      )}
 
-            <NavbarToggler onClick={toggle} />
-            <Collapse isOpen={isOpen} navbar>
-              <Nav className="mr-auto" navbar>
-
-                  <NavItem>
-                    <NavLink tag={Link} to="/admin" className="text-info">Admin</NavLink>
-                  </NavItem>
-
-                
-              </Nav>
-              <NavbarText />
-            </Collapse>
-          </Navbar>
-    
-
+      {isAuthenticated && <button onClick={() => logout()}>Log out</button>}
     </div>
   );
-}
-export default NavbarPage;
+};
+
+export default NavBar;

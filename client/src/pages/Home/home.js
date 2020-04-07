@@ -8,7 +8,7 @@ function home(props) {
     return <div>
 
     <h1>Hello Welcome to The Family Recipe Collection</h1>
-        
+          
     </div>;
 }
 
