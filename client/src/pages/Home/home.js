@@ -15,7 +15,7 @@ function Home() {
     const { loading, user } = useAuth0();
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div>Loading.....</div>;
   } else if (!user) {
     return (
         <div>
