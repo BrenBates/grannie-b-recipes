@@ -15,7 +15,7 @@ function Home() {
     const { loading, user } = useAuth0();
 
   if (loading) {
-    return <div>Loading.....
+    return <div>Loading....
         <h1>Page is loading but Authentication is Responding with 404</h1>
     </div>;
   } else if (!user) {
