@@ -1,6 +1,7 @@
 // src/components/NavBar.js
 
-import React, { Fragment } from "react";
+import React from "react";
+import { Link } from "react-router-dom";
 import { useAuth0 } from "../../react-auth0-spa";
 import Can from "../../components/Can";
 
@@ -22,10 +23,11 @@ const NavBar = () => {
         perform="recipes:edit"
         yes={() => (
         
-            <button onClick={() => console.log('made it')}>New Recipe</button>
-          
+          <Link to={"/newrecipe"}>
+            <button>New Recipe</button>
+          </Link>
         )}
-        no={() => <p></p>}
+       
         />
 
         <Can
@@ -33,10 +35,12 @@ const NavBar = () => {
         perform="blogs:edit"
         yes={() => (
         
-            <button onClick={() => console.log('made it')}>New Blog</button>
+          <Link to={"/newblog"}>
+            <button>New Blog</button>
+          </Link>
           
         )}
-        no={() => <p></p>}
+  
         />
 
 
