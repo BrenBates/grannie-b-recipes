@@ -3,6 +3,14 @@ import '../Home/home.css'
 import {useAuth0} from '../../react-auth0-spa';
 import Can from "../../components/Can";
 
+// 4-19-2020 Bren Bates:
+// Keeping site to a single page format.  Using role based access control to manipulate the page based on user permissions.  
+// Currently, if no user exists it will ask the user to login.  If user exists with visitor home page view access it renders profile info.  
+// If user exists with visitor home page edit access, render buttons to submit new recipe or new blog entries.
+
+// Next Steps... 
+// Create a compon
+
 function Home() {
     const { loading, user } = useAuth0();
 
@@ -11,7 +19,7 @@ function Home() {
   } else if (!user) {
     return (
         <div>
-            <h1>Welcome to the Family Recipe Collection</h1>
+            <h1>Welcome to the Family Kitchen!</h1>
             <h2>Please Log In</h2>
         </div>
     )
@@ -23,6 +31,7 @@ function Home() {
 
     <div>
 
+    
     <Can
     role= {user["https://grannie-b/role"]}
     perform="home-page:edit"
@@ -33,7 +42,6 @@ function Home() {
         </Fragment>
     )}
     no={() => 
-    
         
         <Can
     role= {user["https://grannie-b/role"]}
@@ -50,12 +58,10 @@ function Home() {
     </Fragment>
 
   )}
-    no={() => <h2>Hello{' '+user.name}, welcome to the family recipe collection!</h2>}
+    no={() => <h2>Hello{' '+user.name}, welcome to the family kitchen!</h2>}
     />
     }
     />
-
-    
 
     </div>
    
