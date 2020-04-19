@@ -20,10 +20,7 @@ function App(props) {
 
   return (
 
-
-
       <Router>      
-      <NavBar />
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/admin" component={Admin} />

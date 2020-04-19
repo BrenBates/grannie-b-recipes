@@ -26,14 +26,11 @@ const rules = {
     },
     admin: {
       static: [
-        "posts:list",
-        "posts:create",
-        "posts:edit",
-        "posts:delete",
-        "users:get",
-        "users:getSelf",
+        
         "home-page:visit",
         "home-page:edit",
+        "recipes:edit",
+        "blogs:edit",
         "dashboard-page:visit",
         "profile-page:visit"
       ]
