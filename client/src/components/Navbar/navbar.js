@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { useAuth0 } from "../../react-auth0-spa";
 import Can from "../../components/Can";
 
-const NavBar = () => {
+const NavBar = (props) => {
   const { isAuthenticated, loginWithRedirect, logout, user } = useAuth0();
 
   return (
@@ -42,7 +42,6 @@ const NavBar = () => {
         )}
   
         />
-
 
         </>
 

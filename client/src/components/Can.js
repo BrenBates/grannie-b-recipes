@@ -1,5 +1,3 @@
-
-
 import rules from "../rbac-rules";
 
 const check = (rules, role, action, data) => {
