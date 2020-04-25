@@ -19,7 +19,7 @@ const { loading} = useAuth0();
     <div>
     <Navbar />
         <h1>Welcome to the Family Kitchen!</h1>
-        <h1>{'hello '+process.env.REACT_APP_AUTH0_DOMAIN}</h1>
+       
     </div>
    
   )
