@@ -21,9 +21,10 @@ const onRedirectCallback = appState => {
 
 ReactDOM.render(
   <Auth0Provider
-    domain={process.env.REACT_APP_AUTH0_DOMAIN}
-    client_id={process.env.REACT_APP_AUTH0_CLIENT_ID}
+    domain={process.env.REACT_APP_AUTH_DOMAIN}
+    client_id={process.env.REACT_APP_AUTH_CLIENT_ID}
     redirect_uri={window.location.origin}
+    audience={'https://familykitchen.herokuapp.com/'}
     onRedirectCallback={onRedirectCallback}
   >
     <App />
