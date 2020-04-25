@@ -20,13 +20,7 @@ function App(props) {
       <div>
       
       <p>Loading</p>
-      <h1>react app auth0 domain</h1>
-      <h1>{process.env.REACT_APP_AUTH0_DOMAIN}</h1>
 
-      <h1>no react prefix</h1>
-      <h1>{process.env.AUTH0_DOMAIN}</h1>
-      <h1>{process.env.AUTH0_CLIENT_ID}</h1>
-      
       </div>
       );
     
