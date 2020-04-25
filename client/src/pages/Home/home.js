@@ -5,14 +5,7 @@ import Navbar from "../../components/Navbar/navbar";
 
 
 function Home() {
-    
-const { loading} = useAuth0();
 
-  if (loading) {
-    return <div>Loading......
-    
-    </div>;
-  } else {
 
   return (
 
@@ -23,7 +16,7 @@ const { loading} = useAuth0();
     </div>
    
   )
-}
+
 }
 
 export default Home;
