@@ -6,7 +6,8 @@ class ImageUpload extends Component {
         super(props);
         this.state = {
             image: null,
-            url: ''
+            url: '',
+            progress: 0
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleUpload = this.handleUpload.bind(this);
@@ -26,6 +27,8 @@ class ImageUpload extends Component {
         uploadTask.on('state_changed', 
         (snapshot) => {
             //progress function ...
+            const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+            this.setState({progress})
 
         }, (error) => {
             //error function ...
@@ -34,6 +37,7 @@ class ImageUpload extends Component {
             //complete function ....
             storage.ref('images').child(image.name).getDownloadURL().then(url => {
                 console.log(url);
+                this.setState({url})
             })
         });
     }
@@ -48,8 +52,12 @@ class ImageUpload extends Component {
         };
         return (
             <div style={style}>
+            <progress value={this.state.progress} max="100"/>
+            <br/>
             <input type="file" onChange={this.handleChange}/>
            <button onClick={this.handleUpload}>Upload</button>
+           <br/>
+           <img src={this.state.url || 'https://via.placeholder.com/300x400'} alt="Uploaded images" height="300" width="400"/>
             </div>
         )
     }
