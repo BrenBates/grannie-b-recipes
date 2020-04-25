@@ -16,7 +16,16 @@ function App(props) {
   const { loading } = useAuth0();
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div>
+      
+      <p>Loading</p>
+      <h1>react app auth0 domain</h1>
+      <h1>{process.env.REACT_APP_AUTH0_DOMAIN}</h1>
+      
+      </div>
+      );
+    
   }
 
 
