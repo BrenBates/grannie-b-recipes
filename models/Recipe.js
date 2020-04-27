@@ -8,7 +8,6 @@ const schemaRecipe = new Schema(
         ingredients: {type: String, required: true},
         instructions: {type: String, required: true},
         submitter: {type: String, required: true},
-        source: {type: String},
         background: {type: String},
         date: {type: Date, default: Date.now}
     }
