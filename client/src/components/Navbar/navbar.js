@@ -10,15 +10,17 @@ const NavBar = (props) => {
 
   return (
     <div>
-      {!isAuthenticated && (
+      {!user && (
         <button onClick={() => loginWithRedirect({})}>Log in</button>
       )}
 
-      {isAuthenticated && (
-        <>
+      {user && (
+        <div>
       <button onClick={() => logout()}>Log out</button>
+      <button onClick={() => console.log(user["https://grannie-b/role"])}>test role</button>
+      
+  
 
-      {/* 
         <Can
         role= {user["https://grannie-b/role"]}
         perform="recipes:edit"
@@ -43,10 +45,10 @@ const NavBar = (props) => {
         )}
   
         />
-
-        */}
         
-        </>
+    
+        
+        </div>
 
         
 

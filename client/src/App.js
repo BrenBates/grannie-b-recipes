@@ -5,7 +5,7 @@ import Home from "./pages/Home/home";
 import Admin from "./pages/Admin/admin";
 import NewBlog from "./pages/NewBlog/newblog";
 import NewRecipe from "./pages/NewRecipe/newrecipe";
-import NoMatch from "./pages/nomatch";
+import NoMatch from "./pages/NoMatch";
 import history from "./utils/history"
 
 

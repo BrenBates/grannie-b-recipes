@@ -7,7 +7,12 @@
 
 const rules = {
     visitor: {
-      static: ["posts:list", "home-page:visit"]
+      static: [
+        "posts:list", 
+        "home-page:visit",
+        "recipes:edit",
+        "blogs:edit"
+      ]
     },
     writer: {
       static: [
@@ -26,7 +31,6 @@ const rules = {
     },
     admin: {
       static: [
-        
         "home-page:visit",
         "home-page:edit",
         "recipes:edit",
