@@ -1,20 +1,20 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import React from "react";
+import { Router, Route, Switch } from "react-router-dom";
 
-import Home from './pages/Home/home';
-import Admin from './pages/Admin/admin';
+import Home from "./pages/Home/home";
+import Admin from "./pages/Admin/admin";
 import NewBlog from "./pages/NewBlog/newblog";
 import NewRecipe from "./pages/NewRecipe/newrecipe";
-import NavBar from "./components/Navbar/navbar";
-import NoMatch from './pages/nomatch';
+import NoMatch from "./pages/nomatch";
+import history from "./utils/history"
 
 
 
-function App(props) {
+function App() {
 
   return (
 
-      <Router>      
+      <Router history={history}>      
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/admin" component={Admin} />

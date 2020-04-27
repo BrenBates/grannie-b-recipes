@@ -18,6 +18,7 @@ const NavBar = (props) => {
         <>
       <button onClick={() => logout()}>Log out</button>
 
+      {/* 
         <Can
         role= {user["https://grannie-b/role"]}
         perform="recipes:edit"
@@ -43,7 +44,11 @@ const NavBar = (props) => {
   
         />
 
+        */}
+        
         </>
+
+        
 
       )}
     </div>
