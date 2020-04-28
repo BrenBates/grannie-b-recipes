@@ -7,6 +7,7 @@ import NewBlog from "./pages/NewBlog/newblog";
 import NewRecipe from "./pages/NewRecipe/newrecipe";
 import NoMatch from "./pages/NoMatch";
 import history from "./utils/history"
+import Navbar from "./components/Navbar/navbar";
 
 
 
@@ -14,7 +15,14 @@ function App() {
 
   return (
 
-      <Router history={history}>      
+
+    
+
+      <Router history={history}>  
+      <>    
+      
+      <Navbar />
+
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/admin" component={Admin} />
@@ -22,7 +30,11 @@ function App() {
             <Route path="/newblog" component={NewBlog} />
             <Route component={NoMatch} />
           </Switch>
+      
+          </>
       </Router>
+
+      
     
   );
 }

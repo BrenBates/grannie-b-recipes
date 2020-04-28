@@ -17,7 +17,6 @@ const NavBar = (props) => {
       {user && (
         <div>
       <button onClick={() => logout()}>Log out</button>
-      <button onClick={() => console.log(user["https://grannie-b/role"])}>test role</button>
       
   
 

@@ -10,21 +10,61 @@ import {
     FormGroup,
     Label
   } from 'reactstrap';
-import Navbar from "../../components/Navbar/navbar";
+import './newrecipe.css'
 import ImageUpload from '../../components/ImageUpload';
 
 function NewRecipe(props) {
     
   
-    //text input for Formik form
-    const MyTextInput = ({ label, ...props }) => {
+    //text inputs for Formik form
+
+    const TitleInput = ({ label, ...props }) => {
       // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
       // which we can spread on <input> and alse replace ErrorMessage entirely.
       const [field, meta] = useField(props);
       return (
         <FormGroup>
           <Label className="label-login" for={props.id || props.name}>{label}</Label>
+          <br/>
           <input className="text-input" {...field} {...props} />
+          {meta.touched && meta.error ? (
+            <div className="error">{meta.error}</div>
+          ) : null}
+        </FormGroup>
+      );
+    };
+
+    const BackgroundInput = ({ label, ...props }) => {
+      // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
+      // which we can spread on <input> and alse replace ErrorMessage entirely.
+      const [field, meta] = useField(props);
+      return (
+        <FormGroup>
+          <Label className="label-login" for={props.id || props.name}>{label}</Label>
+          <br/>
+          <input className="text-input" {...field} {...props} />
+          {meta.touched && meta.error ? (
+            <div className="error">{meta.error}</div>
+          ) : null}
+        </FormGroup>
+      );
+    };
+
+    const BulletedInput = ({ label, ...props }) => {
+      // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
+      // which we can spread on <input> and alse replace ErrorMessage entirely.
+      const [field, meta] = useField(props);
+      return (
+        <FormGroup>
+          <Label className="label-login" for={props.id || props.name}>{label}</Label>
+          <br/>
+          <section className="textarea" contentEditable="true" className="text-input" {...field} {...props} >
+            <li>Click to edit</li>
+            <li></li>
+            <li></li>
+          </section>
+
+
           {meta.touched && meta.error ? (
             <div className="error">{meta.error}</div>
           ) : null}
@@ -58,38 +98,47 @@ function NewRecipe(props) {
         >
           <Form>
             <div className="margin-top-login" />
-            <MyTextInput
-              label="Title"
+            <br/>
+            <TitleInput
+              label="Title:"
               name="title"
               type="text"
-              placeholder="insert a title for the recipe"
+              placeholder="Insert a title for the recipe"
             />
-            <MyTextInput
-              label="Ingredients"
+            <br/>
+            <BulletedInput
+              label="Ingredients:"
               name="ingredients"
               type="text"
-              placeholder="insert ingredients list"
+              placeholder="Insert ingredients list"
             />
-            <MyTextInput
-            label="Instructions"
+            <br/>
+            <BulletedInput
+            label="Instructions:"
             name="instructions"
             type="text"
-            placeholder="insert recipe instructions"
+            placeholder="Insert recipe instructions"
           />
-          <MyTextInput
-          label="Background"
+          <br/>
+          <BackgroundInput
+          label="Background:"
           name="background"
           type="text"
-          placeholder="insert recipe background (optional)"
+          placeholder="Insert recipe background (optional)"
         />
+
+        <br/>
+        <p className="label-upload">Upload an Image</p>
+        <ImageUpload />
+        <br/>
+        <br/>
   
-            <button type="submit">Submit</button>
+            <button type="submit">Submit New Recipe</button>
           </Form>
         </Formik>
   
         {/* {props.isError && <Error>{props.errorText}</Error>} */}
 
-        <ImageUpload />
         </Container>
     );
   }

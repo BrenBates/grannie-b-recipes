@@ -43,22 +43,18 @@ class ImageUpload extends Component {
     }
 
     render() {
-        const style = {
-            height: '100vh',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center'
-        };
+    
         return (
-            <div style={style}>
-            <progress value={this.state.progress} max="100"/>
-            <br/>
+            
+            <>     
             <input type="file" onChange={this.handleChange}/>
+            <br/>
            <button onClick={this.handleUpload}>Upload</button>
            <br/>
            <img src={this.state.url || 'https://via.placeholder.com/300x400'} alt="Uploaded images" height="300" width="400"/>
-            </div>
+           <br/>
+           <progress value={this.state.progress} max="100"/>
+           </>
         )
     }
 }
