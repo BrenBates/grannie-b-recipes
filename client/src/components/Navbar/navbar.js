@@ -11,9 +11,7 @@ const NavBar = (props) => {
   return (
     <div>
       {!user && (
-        <button onClick={() => 
-          loginWithRedirect({})}
-          >Log in</button>
+        <button onClick={() => loginWithRedirect({})}>Log in</button>
       )}
 
       {user && (
