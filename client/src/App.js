@@ -7,7 +7,7 @@ import NewBlog from "./pages/NewBlog/newblog";
 import NewRecipe from "./pages/NewRecipe/newrecipe";
 import NoMatch from "./pages/NoMatch";
 import history from "./utils/history"
-import {useAuth0} from '../../react-auth0-spa';
+import {useAuth0} from './react-auth0-spa';
 
 
 
