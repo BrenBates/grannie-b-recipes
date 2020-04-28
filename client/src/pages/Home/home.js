@@ -12,6 +12,7 @@ function Home() {
     <div>
     <Navbar />
         <h1>Welcome to the Family Kitchen!</h1>
+        <h1>{process.env.REACT_APP_AUTH_DOMAIN}</h1>
        
     </div>
    
