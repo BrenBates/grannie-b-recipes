@@ -6,8 +6,16 @@ import Navbar from "../../components/Navbar/navbar";
 
 function Home() {
 
+  const {loading} = useAuth0();
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
 
   return (
+
+    <Fragment>
 
     <div>
     <Navbar />
@@ -16,9 +24,11 @@ function Home() {
         <h1>{process.env.REACT_APP_AUTH_DOMAIN}</h1>
         <h1>{process.env.REACT_APP_AUTH_CLIENT}</h1>
     </div>
-   
-  )
 
-}
+    </Fragment>
+   
+  );
+
+};
 
 export default Home;
