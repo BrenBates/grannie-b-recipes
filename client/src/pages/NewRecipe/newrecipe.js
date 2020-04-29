@@ -18,7 +18,7 @@ function NewRecipe(props) {
   
     //text inputs for Formik form
 
-    const TitleInput = ({ label, ...props }) => {
+    const TextInput = ({ label, ...props }) => {
       // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
       // which we can spread on <input> and alse replace ErrorMessage entirely.
       const [field, meta] = useField(props);
@@ -26,7 +26,7 @@ function NewRecipe(props) {
         <FormGroup>
           <Label className="label-login" for={props.id || props.name}>{label}</Label>
           <br/>
-          <input className="text-input" {...field} {...props} />
+          <textarea className="text-input" {...field} {...props} />
           {meta.touched && meta.error ? (
             <div className="error">{meta.error}</div>
           ) : null}
@@ -34,51 +34,16 @@ function NewRecipe(props) {
       );
     };
 
-    const BackgroundInput = ({ label, ...props }) => {
-      // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
-      // which we can spread on <input> and alse replace ErrorMessage entirely.
-      const [field, meta] = useField(props);
-      return (
-        <FormGroup>
-          <Label className="label-login" for={props.id || props.name}>{label}</Label>
-          <br/>
-          <input className="text-input" {...field} {...props} />
-          {meta.touched && meta.error ? (
-            <div className="error">{meta.error}</div>
-          ) : null}
-        </FormGroup>
-      );
-    };
+ 
 
-    const BulletedInput = ({ label, ...props }) => {
-      // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
-      // which we can spread on <input> and alse replace ErrorMessage entirely.
-      const [field, meta] = useField(props);
-      return (
-        <FormGroup>
-          <Label className="label-login" for={props.id || props.name}>{label}</Label>
-          <br/>
-          <section className="textarea" contentEditable="true" className="text-input" {...field} {...props} >
-            <li>Click to edit</li>
-            <li></li>
-            <li></li>
-          </section>
-
-
-          {meta.touched && meta.error ? (
-            <div className="error">{meta.error}</div>
-          ) : null}
-        </FormGroup>
-      );
-    };
   
     return (
       <Container>
         <Formik
           initialValues={{
             title: "",
-            ingredients: "",
-            instructions: "",
+            ingredients: "•",
+            instructions: "•",
             background: ""
           }}
           validationSchema={Yup.object({
@@ -99,28 +64,28 @@ function NewRecipe(props) {
           <Form>
             <div className="margin-top-login" />
             <br/>
-            <TitleInput
+            <TextInput
               label="Title:"
               name="title"
               type="text"
               placeholder="Insert a title for the recipe"
             />
             <br/>
-            <BulletedInput
+            <TextInput
               label="Ingredients:"
               name="ingredients"
               type="text"
               placeholder="Insert ingredients list"
             />
             <br/>
-            <BulletedInput
+            <TextInput
             label="Instructions:"
             name="instructions"
             type="text"
             placeholder="Insert recipe instructions"
           />
           <br/>
-          <BackgroundInput
+          <TextInput
           label="Background:"
           name="background"
           type="text"
@@ -128,7 +93,7 @@ function NewRecipe(props) {
         />
 
         <br/>
-        <p className="label-upload">Upload an Image</p>
+        <p className="label-upload">Upload an Image - optional</p>
         <ImageUpload />
         <br/>
         <br/>

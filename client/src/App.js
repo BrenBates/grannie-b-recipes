@@ -15,11 +15,10 @@ function App() {
 
   return (
 
-
-    
-
+    <div className="App">
+  
       <Router history={history}>  
-      <>    
+      <div> 
       
       <Navbar />
 
@@ -30,9 +29,11 @@ function App() {
             <Route path="/newblog" component={NewBlog} />
             <Route component={NoMatch} />
           </Switch>
-      
-          </>
+      </div>   
+
       </Router>
+
+      </div>
 
       
     
