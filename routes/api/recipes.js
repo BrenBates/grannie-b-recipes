@@ -4,6 +4,7 @@ const recipesController = require("../../controllers/recipesController");
 // Matches with "/api/blogs"
 router.route("/")
   .get(recipesController.findAll)
+  .post(recipesController.createRecipe)
 
 
   //Matches with "/api/houses/savehouse/:id"

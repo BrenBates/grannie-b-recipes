@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import * as Yup from "yup";
+import {useAuth0} from '../../react-auth0-spa';
 import { Formik, Form, useField } from "formik";
 import {
     Container,
@@ -13,8 +14,15 @@ import {
 import './newrecipe.css'
 import ImageUpload from '../../components/ImageUpload';
 
+
 function NewRecipe(props) {
+
+    const { loading, user } = useAuth0();
+
     
+  if (loading || !user) {
+    return <div>Log in to view content</div>;
+  }
   
     //text inputs for Formik form
 
@@ -36,18 +44,21 @@ function NewRecipe(props) {
 
  
 
-  
     return (
       <Container>
+             
         <Formik
           initialValues={{
-            title: "",
+            title: "a",
+            category: "b",
             ingredients: "•",
             instructions: "•",
-            background: ""
+            background: "c"
           }}
           validationSchema={Yup.object({
             title: Yup.string()
+              .required("Required"),
+            category: Yup.string()
               .required("Required"),
             ingredients: Yup.string()
               .required('Required'),
@@ -56,7 +67,21 @@ function NewRecipe(props) {
           })}
           onSubmit={(values, { setSubmitting }) => {
   
-            console.log(values)
+            let payload = {
+              title: values.title,
+              category: values.category,
+              ingredients: values.ingredients,
+              instructions: values.instructions,
+              background: values.background,
+              submitter: user.name
+            }
+
+            console.log(payload)
+
+            axios.post("/api/recipes", payload).then(result => {
+              console.log('this is the axios result')
+              console.log(result)
+            })
   
     
           }}
@@ -71,6 +96,13 @@ function NewRecipe(props) {
               placeholder="Insert a title for the recipe"
             />
             <br/>
+            <TextInput
+            label="Category:"
+            name="category"
+            type="text"
+            placeholder="What type of food is this?"
+             />
+          <br/>
             <TextInput
               label="Ingredients:"
               name="ingredients"
