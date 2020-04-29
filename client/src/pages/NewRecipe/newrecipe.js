@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import * as Yup from "yup";
 import {useAuth0} from '../../react-auth0-spa';
-import { Formik, Form, useField } from "formik";
+import { Field, Formik, Form, useField } from "formik";
 import {
     Container,
     Row,
@@ -42,6 +42,47 @@ function NewRecipe(props) {
       );
     };
 
+    const SelectInput = ({ label, ...props }) => {
+      // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
+      // which we can spread on <input> and alse replace ErrorMessage entirely.
+      const [field, meta] = useField(props);
+      return (
+        <FormGroup>
+          <Label className="label-login" for={props.id || props.name}>{label}</Label>
+          <br/>
+          
+          <Field as="select" name="category">
+            <option value=""></option>
+            <option value="appetizers">Appetizers</option>
+            <option value="barbeque">Barbeque</option>
+            <option value="beef">Beef</option>
+            <option value="beverages">Beverages</option>
+            <option value="breads_sandwiches">Breads & Sandwiches</option>
+            <option value="desserts_fruits">Desserts & Fruits</option>
+            <option value="fondue_cheese">Fondue & Cheese</option>
+            <option value="pasta_sauces">Pasta & Sauces</option>
+            <option value="pastry_pies">Pastry & Pies</option>
+            <option value="pork_lamb">Pork & Lamb</option>
+            <option value="poultry_eggs">Poultry & Eggs</option>
+            <option value="salads_dressings">Salads & Dressings</option>
+            <option value="seafood_fish">Seafood & Fish</option>
+            <option value="soups">Soups</option>
+            <option value="vegetables">Vegetables</option>
+            <option value="miscellaneous">Miscellaneous</option>
+          </Field>
+      
+          
+          {meta.touched && meta.error ? (
+            <div className="error">{meta.error}</div>
+          ) : null}
+        </FormGroup>
+      );
+    };
+
+
+
+
+
  
 
     return (
@@ -50,7 +91,7 @@ function NewRecipe(props) {
         <Formik
           initialValues={{
             title: "a",
-            category: "b",
+            category: "",
             ingredients: "•",
             instructions: "•",
             background: "c"
@@ -96,7 +137,8 @@ function NewRecipe(props) {
               placeholder="Insert a title for the recipe"
             />
             <br/>
-            <TextInput
+           
+            <SelectInput
             label="Category:"
             name="category"
             type="text"
