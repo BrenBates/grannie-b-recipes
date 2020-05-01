@@ -17,7 +17,14 @@ const NavBar = (props) => {
       {user && (
         <div>
       <button onClick={() => logout()}>Log out</button>
-      
+     
+      <Link to={"/"}>
+            <button>Home</button>
+      </Link>
+    
+      <Link to={"/favorites"}>
+            <button>Favorites</button>
+      </Link>
   
 
         <Can

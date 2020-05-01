@@ -60,6 +60,7 @@ function NewRecipe(props) {
             <option value="dinner">Dinner</option>
             <option value="breads">Breads</option>
             <option value="dessert">Dessert</option>
+            <option value="frostingandpiedough">Frosting and Pie Dough</option>
             
           </Field>
       
