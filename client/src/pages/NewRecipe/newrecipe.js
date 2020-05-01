@@ -53,22 +53,14 @@ function NewRecipe(props) {
           
           <Field as="select" name="category">
             <option value=""></option>
-            <option value="appetizers">Appetizers</option>
-            <option value="barbeque">Barbeque</option>
-            <option value="beef">Beef</option>
-            <option value="beverages">Beverages</option>
-            <option value="breads_sandwiches">Breads & Sandwiches</option>
-            <option value="desserts_fruits">Desserts & Fruits</option>
-            <option value="fondue_cheese">Fondue & Cheese</option>
-            <option value="pasta_sauces">Pasta & Sauces</option>
-            <option value="pastry_pies">Pastry & Pies</option>
-            <option value="pork_lamb">Pork & Lamb</option>
-            <option value="poultry_eggs">Poultry & Eggs</option>
-            <option value="salads_dressings">Salads & Dressings</option>
-            <option value="seafood_fish">Seafood & Fish</option>
-            <option value="soups">Soups</option>
-            <option value="vegetables">Vegetables</option>
-            <option value="miscellaneous">Miscellaneous</option>
+            <option value="salad">Salad</option>
+            <option value="soup">Soup</option>
+            <option value="sidesandsnacks">Sides and Snacks</option>
+            <option value="breakfast">Breakfast</option>
+            <option value="dinner">Dinner</option>
+            <option value="breads">Breads</option>
+            <option value="dessert">Dessert</option>
+            
           </Field>
       
           
