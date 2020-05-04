@@ -83,11 +83,11 @@ function NewRecipe(props) {
              
         <Formik
           initialValues={{
-            title: "a",
+            title: "",
             category: "",
             ingredients: "•",
-            instructions: "•",
-            background: "c"
+            instructions: "",
+            background: ""
           }}
           validationSchema={Yup.object({
             title: Yup.string()
