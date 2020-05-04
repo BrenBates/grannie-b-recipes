@@ -3,7 +3,7 @@ const recipesController = require("../../controllers/recipesController");
 
 // Matches with "/api/blogs"
 router.route("/")
-  .get(recipesController.findAll)
+  .get(recipesController.pullRecipes)
   .post(recipesController.createRecipe)
 
 

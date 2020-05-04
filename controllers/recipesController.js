@@ -3,13 +3,27 @@ const db = require("../models");
 // Defining methods for the housesController
 module.exports = {
 
-  findAll: function(req, res) {
-    console.log('houses findAll');
+  pullRecipes: function(req, res) {
+    console.log('pull Recipes');
+    console.log(req.query.value)
+
+    if(!req.query.value) {
+      db.Recipe 
+        .find({})
+        .sort({date:-1})
+        .then(dbModel => {res.json(dbModel)})
+        .catch(err => res.status(422).json(err));
+    } else {
+
     db.Recipe
-      .find(req.query)
+      .find({
+        category: req.query.value
+      })
       .sort({ date: -1 })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
+
+    }
   },
 
   createRecipe: function(req,res) {
