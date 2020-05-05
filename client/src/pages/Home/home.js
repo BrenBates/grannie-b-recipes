@@ -88,17 +88,14 @@ const renderRecipes = () => {
           <Wrapper>
             {renderRecipes()}
           </Wrapper>
-
          
         </Row>
 
-        <Row>
-          <Pagination
+        <Pagination
             postsPerPage={recipesPerPage}
             totalPosts={recipeData.length}
             paginate={paginate}
           />
-        </Row>
    
 
    </div>
