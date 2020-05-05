@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import './recipedetail.css'
 import axios from 'axios';
 import {
+    Card,
     Container,
     Row,
     Col,
@@ -67,25 +68,41 @@ function RecipeDetail(props) {
 
     return ( <>
 
-        <Row>    
-           <h1>{recipe.title}</h1>
-        </Row>
+    <Row>  
+        <Col sm="4">
+            <Card className="recipeDetailCard" body inverse style={{ backgroundColor: '#aaaaaa', borderColor: '#5d2906' }}> 
+            <h1>{recipe.title}</h1>
+            </Card>
+        </Col>
+    </Row>
         
         <Row>
 
             <Col sm="4">
+                
+            <Card className="recipeDetailCard" body inverse style={{ backgroundColor: '#aaaaaa', borderColor: '#5d2906' }}>
             {renderIngredients()}
+            </Card>
+
             </Col>
 
-            <Col sm="6">
+        </Row>
+    
+
+    <Row>
+         <Col sm="6">
+
+        <Card className="recipeDetailCard" body inverse style={{ backgroundColor: '#aaaaaa', borderColor: '#5d2906' }}>
+       
                 {recipe.instructions}
                 <br/>
                 {recipe.background}
-            </Col>
+          
+
+         </Card>
+         </Col>
       
-        </Row>
-
-
+    </Row>
         </>
     );
 }
