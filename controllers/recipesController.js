@@ -25,6 +25,15 @@ module.exports = {
 
     }
   },
+  pullRecipeByID: function(req, res) {
+    console.log('pull Recipes by ID');
+    console.log(req.params.id)
+
+    db.Recipe
+      .findById(req.params.id)
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
 
   createRecipe: function(req,res) {
     console.log('create recipe')

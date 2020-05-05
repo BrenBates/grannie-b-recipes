@@ -36,8 +36,6 @@ useEffect(() => {
 
 const renderRecipes = () => {
   if(recipeData[0]) {
-    console.log('rendering recipess')
-    console.log(recipeData)
     return (
       recipeData.map(item => 
         <RecipesCard

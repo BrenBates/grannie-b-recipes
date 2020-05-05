@@ -8,9 +8,8 @@ router.route("/")
 
 
   //Matches with "/api/houses/savehouse/:id"
-// router.route("/savehouse/:id")
-//   .post(housesController.savehouse)
-//   .delete(housesController.deleteSavedHouse)
+router.route("/:id")
+  .get(recipesController.pullRecipeByID)
 
 // Matches with "/api/houses/:id"
 // router
