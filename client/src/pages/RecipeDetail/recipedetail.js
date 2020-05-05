@@ -7,7 +7,8 @@ import {
     Col,
     ListGroup
   } from 'reactstrap';
-import { string } from "yup";
+
+
 
 function RecipeDetail(props) {
 
@@ -64,19 +65,29 @@ function RecipeDetail(props) {
     }
 
 
-    return <div>
-        <h1>{recipe.title}</h1>
-             
-        {renderIngredients()}
+    return ( <>
 
-        {recipe.instructions}
-
-        <br/>
-
-        {recipe.background}
+        <Row>    
+           <h1>{recipe.title}</h1>
+        </Row>
         
-    
-    </div>;
+        <Row>
+
+            <Col sm="4">
+            {renderIngredients()}
+            </Col>
+
+            <Col sm="6">
+                {recipe.instructions}
+                <br/>
+                {recipe.background}
+            </Col>
+      
+        </Row>
+
+
+        </>
+    );
 }
 
 
