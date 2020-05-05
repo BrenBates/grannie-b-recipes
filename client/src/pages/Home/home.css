@@ -22,6 +22,7 @@ html {
   width: 90vw !important;
   margin-left: auto !important;
   margin-right: auto !important;
+  overflow: scroll !important;
   }
 
   .row {

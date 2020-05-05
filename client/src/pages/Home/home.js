@@ -9,12 +9,14 @@ import {
 } from 'reactstrap';
 import RecipesCard from "../../components/RecipesCard/recipescard";
 import Wrapper from "../../components/Wrapper/index";
-
+import Pagination from '../../components/Pagination';
 
 
 function Home() {
 
 const [recipeData, setRecipeData] = useState([]);
+const [currentPage, setCurrentPage] = useState(1);
+const [recipesPerPage] = useState(6);
 
 const handleClick = (value) => {
   
@@ -34,10 +36,19 @@ useEffect(() => {
   renderRecipes()
 },[recipeData]);
 
+
+  // Get current posts
+  const indexOfLastRecipe = currentPage * recipesPerPage;
+  const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage;
+  const currentRecipes = recipeData.slice(indexOfFirstRecipe, indexOfLastRecipe);
+
+  // Change page
+  const paginate = pageNumber => setCurrentPage(pageNumber);
+
 const renderRecipes = () => {
   if(recipeData[0]) {
     return (
-      recipeData.map(item => 
+      currentRecipes.map(item => 
         <RecipesCard
           key={item._id}
           id={item._id}
@@ -77,7 +88,16 @@ const renderRecipes = () => {
           <Wrapper>
             {renderRecipes()}
           </Wrapper>
-          
+
+         
+        </Row>
+
+        <Row>
+          <Pagination
+            postsPerPage={recipesPerPage}
+            totalPosts={recipeData.length}
+            paginate={paginate}
+          />
         </Row>
    
 
