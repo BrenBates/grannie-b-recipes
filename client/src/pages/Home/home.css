@@ -1,5 +1,5 @@
 html {
-    height: 100%;
+    height: 100% !important;
     background: url("../../assets/img/FarmhouseKitchen.jpg") no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -18,7 +18,7 @@ html {
   font-weight: bold !important;
   border: 3px solid #f1f1f1 !important;
   padding: 0 !important;
-  height: 100% !important;
+  min-height: 100% !important;
   width: 90vw !important;
   margin-left: auto !important;
   margin-right: auto !important;

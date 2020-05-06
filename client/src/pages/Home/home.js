@@ -57,6 +57,7 @@ const renderRecipes = () => {
           instructions={item.instructions}
           background={item.background}
           submitter={item.submitter}
+          recipeImageURL={item.recipeImageURL}
         />
         )
     )

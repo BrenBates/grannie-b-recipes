@@ -71,14 +71,14 @@ function RecipeDetail(props) {
     <Row>  
         <Col sm="4">
             <Card className="recipeDetailCard" body inverse style={{ backgroundColor: '#aaaaaa', borderColor: '#5d2906' }}> 
-            <h1>{recipe.title}</h1>
+            <h3>{recipe.title}</h3>
             </Card>
         </Col>
     </Row>
         
         <Row>
 
-            <Col sm="4">
+            <Col sm="12" md="6">
                 
             <Card className="recipeDetailCard" body inverse style={{ backgroundColor: '#aaaaaa', borderColor: '#5d2906' }}>
             {renderIngredients()}
@@ -86,11 +86,7 @@ function RecipeDetail(props) {
 
             </Col>
 
-        </Row>
-    
-
-    <Row>
-         <Col sm="6">
+         <Col sm="12" md="6">
 
         <Card className="recipeDetailCard" body inverse style={{ backgroundColor: '#aaaaaa', borderColor: '#5d2906' }}>
        

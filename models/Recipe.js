@@ -10,7 +10,8 @@ const schemaRecipe = new Schema(
         instructions: {type: String, required: true},
         background: {type: String},
         submitter: {type: String, required: true},
-        date: {type: Date, default: Date.now}
+        date: {type: Date, default: Date.now},
+        recipeImageURL: {type: String, default: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg/1200px-Good_Food_Display_-_NCI_Visuals_Online.jpg'}
     }
 );
 
