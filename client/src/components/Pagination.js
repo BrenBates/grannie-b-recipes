@@ -7,19 +7,29 @@ const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
     pageNumbers.push(i);
   }
 
-  return (
-    <nav>
-      <ul className='pagination'>
-        {pageNumbers.map(number => (
-          <li key={number} className='page-item'>
-            <p onClick={() => paginate(number)} className='page-link'>
-              {number}
-            </p>
-          </li>
-        ))}
-      </ul>
-    </nav>
-  );
+  if(pageNumbers.length > 1) {
+
+    return (
+      <nav>
+        <ul className='pagination'>
+          {pageNumbers.map(number => (
+            <li key={number} className='page-item'>
+              <p onClick={() => paginate(number)} className='page-link'>
+                {number}
+              </p>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    );
+
+  } else {
+    return (
+      <br/>
+    ) 
+  }
+
+
 };
 
 export default Pagination;

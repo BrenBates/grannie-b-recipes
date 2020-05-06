@@ -5,7 +5,6 @@ module.exports = {
 
   pullRecipes: function(req, res) {
     console.log('pull Recipes');
-    console.log(req.query.value)
 
     if(!req.query.value) {
       db.Recipe 
@@ -27,7 +26,6 @@ module.exports = {
   },
   pullRecipeByID: function(req, res) {
     console.log('pull Recipes by ID');
-    console.log(req.params.id)
 
     db.Recipe
       .findById(req.params.id)
@@ -37,7 +35,7 @@ module.exports = {
 
   createRecipe: function(req,res) {
     console.log('create recipe')
-    console.log(req.body)
+
     db.Recipe.create(req.body)
     .then(dbModel => res.json(dbModel))
     .catch(err => {
