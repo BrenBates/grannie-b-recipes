@@ -23,6 +23,9 @@ class ImageUpload extends Component {
 
     handleUpload = () => {
         const {image} = this.state;
+
+        if(image) {
+
         const uploadTask = storage.ref(`images/${image.name}`).put(image);
         uploadTask.on('state_changed', 
         (snapshot) => {
@@ -38,8 +41,10 @@ class ImageUpload extends Component {
             storage.ref('images').child(image.name).getDownloadURL().then(url => {
                 console.log(url);
                 this.setState({url})
+                this.props.handleUpload({url})
             })
         });
+        }
     }
 
     render() {
@@ -49,7 +54,7 @@ class ImageUpload extends Component {
             <>     
             <input type="file" onChange={this.handleChange}/>
             <br/>
-           <button onClick={this.handleUpload}>Upload</button>
+           <button style={{width: '30%'}} onClick={this.handleUpload}>Upload</button>
            <br/>
            <img src={this.state.url || 'https://via.placeholder.com/300x400'} alt="Uploaded images" height="300" width="400"/>
            <br/>

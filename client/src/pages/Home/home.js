@@ -16,7 +16,7 @@ function Home() {
 
 const [recipeData, setRecipeData] = useState([]);
 const [currentPage, setCurrentPage] = useState(1);
-const [recipesPerPage] = useState(6);
+const [recipesPerPage] = useState(10);
 
 const handleClick = (value) => {
   
@@ -27,6 +27,7 @@ const handleClick = (value) => {
   })
     .then(result => {
       setRecipeData(result.data)
+      setCurrentPage(1)
     });
 
 

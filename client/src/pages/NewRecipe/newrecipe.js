@@ -4,6 +4,7 @@ import * as Yup from "yup";
 import {useAuth0} from '../../react-auth0-spa';
 import { Field, Formik, Form, useField } from "formik";
 import {
+    Card,
     Container,
     Row,
     Col,
@@ -19,7 +20,8 @@ function NewRecipe(props) {
 
     const { loading, user } = useAuth0();
 
-    
+    const [imageURL,setImageURL] = useState('')
+
   if (loading || !user) {
     return <div>Log in to view content</div>;
   }
@@ -72,16 +74,27 @@ function NewRecipe(props) {
       );
     };
 
+    const handleUpload = (imgURL) => {
 
+      setImageURL(imgURL)
 
+    }
 
-
- 
 
     return (
-      <Container>
-             
-        <Formik
+      <>
+        
+      <Row>
+      
+    
+
+        <Col sm="6">
+
+        <Card className="newRecipeCard" body inverse style={{ backgroundColor: '#aaaaaa', borderColor: '#5d2906' }}> 
+
+       
+
+         <Formik
           initialValues={{
             title: "",
             category: "",
@@ -100,16 +113,18 @@ function NewRecipe(props) {
               .required('Required'),
           })}
           onSubmit={(values, { setSubmitting }) => {
-  
-            let payload = {
-              title: values.title,
-              category: values.category,
-              ingredients: values.ingredients,
-              instructions: values.instructions,
-              background: values.background,
-              submitter: user.name
-            }
 
+
+              let payload = {
+                title: values.title,
+                category: values.category,
+                ingredients: values.ingredients,
+                instructions: values.instructions,
+                background: values.background,
+                submitter: user.name,
+                recipeImageURL: [imageURL.url]
+              }
+ 
             console.log(payload)
 
             axios.post("/api/recipes", payload).then(result => {
@@ -160,18 +175,30 @@ function NewRecipe(props) {
         />
 
         <br/>
-        <p className="label-upload">Upload an Image - optional</p>
-        <ImageUpload />
-        <br/>
-        <br/>
+        
+       
   
             <button type="submit">Submit New Recipe</button>
           </Form>
         </Formik>
   
+      
+        </Card>
+        </Col>
+
         {/* {props.isError && <Error>{props.errorText}</Error>} */}
 
-        </Container>
+        <Col sm="6">
+      
+           <Card className="newRecipeCard" body inverse style={{ backgroundColor: '#aaaaaa', borderColor: '#5d2906' }}> 
+            <p className="label-upload">Upload an Image - optional</p>
+            <ImageUpload handleUpload={handleUpload} />
+          </Card>
+        
+        </Col>
+
+      </Row>
+        </>
     );
   }
   

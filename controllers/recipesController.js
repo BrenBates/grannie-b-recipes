@@ -35,6 +35,7 @@ module.exports = {
 
   createRecipe: function(req,res) {
     console.log('create recipe')
+    console.log(req.body)
 
     db.Recipe.create(req.body)
     .then(dbModel => res.json(dbModel))

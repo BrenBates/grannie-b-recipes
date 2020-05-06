@@ -8,7 +8,7 @@ import {
     Col,
     ListGroup
   } from 'reactstrap';
-
+import Wrapper from "../../components/Wrapper/index";
 
 
 function RecipeDetail(props) {
@@ -93,6 +93,11 @@ function RecipeDetail(props) {
                 {recipe.instructions}
                 <br/>
                 {recipe.background}
+                <br/>
+
+                <Wrapper>
+                    <img className="recipeDetailImage" src={recipe.recipeImageURL}></img>
+                 </Wrapper>
           
 
          </Card>

@@ -3,3 +3,7 @@ label, .label-upload {
     font-size: 2vw;
     color: white;
 }
+
+.newRecipeCard {
+    margin-top: 3%;
+}
