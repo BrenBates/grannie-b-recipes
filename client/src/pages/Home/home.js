@@ -71,19 +71,31 @@ const renderRecipes = () => {
 
     <div>
     
-        <h1>Welcome to the Family Kitchen!</h1>
 
         <Row>
-          <button onClick ={()=>handleClick()}>all recipes</button>
-          <button onClick ={()=>handleClick('salad')}>salads</button>
-          <button onClick ={()=>handleClick('soup')}>soups</button>
-          <button onClick ={()=>handleClick('sidesandsnacks')}>sides/snacks</button>
-          <button onClick ={()=>handleClick('breakfast')}>breakfast</button>
-          <button onClick ={()=>handleClick('dinner')}>dinner</button>
-          <button onClick ={()=>handleClick('breads')}>breads</button>
-          <button onClick ={()=>handleClick('dessert')}>desserts</button>
-          <button onClick ={()=>handleClick('frostingandpiedough')}>frostings/pie doughs</button>
+          <Col xs="0" sm="2">
+          </Col>
+
+          <Col xs="12" sm="8" className="pl-0 pr-0">
+          
+            <button onClick ={()=>handleClick()}>All Recipes</button>
+            <button onClick ={()=>handleClick('salad')}>Salads</button>
+            <button onClick ={()=>handleClick('soup')}>Soups</button>
+            <button onClick ={()=>handleClick('sidesandsnacks')}>Sides/Snacks</button>
+            <button onClick ={()=>handleClick('breakfast')}>Breakfast</button>
+            <button onClick ={()=>handleClick('dinner')}>Dinner</button>
+            <button onClick ={()=>handleClick('breads')}>Breads</button>
+            <button onClick ={()=>handleClick('dessert')}>Desserts</button>
+            <button onClick ={()=>handleClick('frostingandpiedough')}>Frostings/Pie Doughs</button>
+          
+          </Col>
+
+          <Col xs="0" sm="2">
+          </Col>
+
         </Row>
+
+        <br/>
 
         <Row>
 

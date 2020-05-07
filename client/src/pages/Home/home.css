@@ -15,7 +15,8 @@ html {
   body {
   background-color: rgba(0,0,0, 0.4) !important; /* Black w/opacity/see-through */
   color: white !important;
-  font-weight: bold !important;
+  /* font-weight: bold !important; */
+  font-family: 'Domine', serif !important;
   border: 3px solid #f1f1f1 !important;
   padding: 0 !important;
   min-height: 100% !important;
@@ -24,6 +25,7 @@ html {
   margin-right: auto !important;
   overflow: scroll !important;
   }
+
 
   .row {
     margin-left: 0 !important;

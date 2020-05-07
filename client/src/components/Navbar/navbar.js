@@ -4,11 +4,28 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useAuth0 } from "../../react-auth0-spa";
 import Can from "../../components/Can";
+import {
+  Row,
+  Col
+} from 'reactstrap';
+import "./navbar.css"
 
 const NavBar = (props) => {
   const { loginWithRedirect, logout, user } = useAuth0();
 
   return (
+
+    <>
+
+    <Row className = "navRow">
+
+    <Col xs="5" className="pr-0 pl-0">
+      <h1>Family Kitchen</h1>
+    </Col>
+
+    <Col xs="7" className="d-flex flex-sm-row-reverse pr-0 pl-0">
+    
+
     <div>
       {!user && (
         <button onClick={() => loginWithRedirect({})}>Log in</button>
@@ -52,7 +69,6 @@ const NavBar = (props) => {
   
         />
         
-    
         
         </div>
 
@@ -60,6 +76,13 @@ const NavBar = (props) => {
 
       )}
     </div>
+
+    </Col>
+    </Row>
+
+    <br/>
+
+    </>
   );
 };
 
