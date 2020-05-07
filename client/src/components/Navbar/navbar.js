@@ -15,18 +15,20 @@ const NavBar = (props) => {
 
   return (
 
-    <>
+    <div className="d-flex">
 
-    <Row className = "navRow">
-
-    <Col xs="5" className="pr-0 pl-0">
-      <h1>Family Kitchen</h1>
-    </Col>
-
-    <Col xs="7" className="d-flex flex-sm-row-reverse pr-0 pl-0">
     
 
-    <div>
+    <div className="mr-auto">
+    <h1>Family Kitchen</h1>
+    </div>
+     
+   
+
+   
+    
+
+    <div className="ml-auto">
       {!user && (
         <button onClick={() => loginWithRedirect({})}>Log in</button>
       )}
@@ -77,12 +79,11 @@ const NavBar = (props) => {
       )}
     </div>
 
-    </Col>
-    </Row>
+   
 
     <br/>
 
-    </>
+    </div>
   );
 };
 
