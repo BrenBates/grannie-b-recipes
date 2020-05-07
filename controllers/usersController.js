@@ -8,18 +8,31 @@ module.exports = {
     //This function runs when the recipe detail page is first loaded up with an active user.
     //It sets into the state a true or false value if that recipe is one of the users favorites.
 
+    console.log(req.query)
 
     db.User.findOne({
       email: req.query.userEmail 
     })
         .then(dbModel => {
-
-          let fav = false
+         
+          console.log(dbModel.Recipe.length)
+         
+          let fav = false;
 
 
           for(let i=0; i < dbModel.Recipe.length; i++) {
-            if(dbModel.Recipe[i] === req.query.recipeID) {
-              fav = true
+
+           let recipeQuery = req.query.recipeID
+           let recipeDB = dbModel.Recipe[i].toString()
+
+          console.log(recipeQuery)
+          console.log(recipeDB)
+        
+            if(recipeDB == recipeQuery) {
+             
+              console.log('hello')
+              fav=true;
+
             }
           }
     
@@ -34,6 +47,7 @@ module.exports = {
 
     handleUserFavorite: function(req,res) {
         console.log('handling user favorite')
+        console.log(req.body)
 
 
         db.User.findOne({
@@ -41,6 +55,8 @@ module.exports = {
         })
           .then(function(dbUser) {
 
+            console.log('this is the dbUser')
+            console.log(dbUser)
 
              //If a user is not found, need to create that user and go ahead and add the new favorite recipe.
 
