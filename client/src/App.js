@@ -6,6 +6,7 @@ import Admin from "./pages/Admin/admin";
 import NewBlog from "./pages/NewBlog/newblog";
 import NewRecipe from "./pages/NewRecipe/newrecipe";
 import RecipeDetail from "./pages/RecipeDetail/recipedetail";
+import Favorites from "./pages/Favorites/favorites";
 import NoMatch from "./pages/NoMatch";
 import history from "./utils/history"
 import Navbar from "./components/Navbar/navbar";
@@ -30,6 +31,7 @@ function App() {
             <Route path="/admin" component={Admin} />
             <Route path="/newrecipe" component={NewRecipe} />
             <Route path="/newblog" component={NewBlog} />
+            <Route path="/favorites" component={Favorites} />
             <Route path="/recipes/:id" component={RecipeDetail} />
             <Route component={NoMatch} />
           </Switch>

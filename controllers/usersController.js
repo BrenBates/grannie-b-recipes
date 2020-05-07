@@ -17,8 +17,8 @@ module.exports = {
           let fav = false
 
 
-          for(let i=0; i < dbModel.favRecipes.length; i++) {
-            if(dbModel.favRecipes[i] === req.query.recipeID) {
+          for(let i=0; i < dbModel.Recipe.length; i++) {
+            if(dbModel.Recipe[i] === req.query.recipeID) {
               fav = true
             }
           }
@@ -48,7 +48,7 @@ module.exports = {
 
               db.User.create({
                 email: req.body.userEmail,
-                favRecipes: req.body.recipeID
+                Recipe: req.body.recipeID
               })
                .then(newUser => {res.send(true)})
                .catch(err => res.status(422).json(err));
@@ -61,7 +61,7 @@ module.exports = {
 
               db.User.updateOne({
                 dbUser,
-                $push: {favRecipes: req.body.recipeID}
+                $push: {Recipe: req.body.recipeID}
               })
               .then(res.send(true))
 
@@ -75,7 +75,7 @@ module.exports = {
 
               db.User.updateOne({
                 dbUser,
-                $pull: {favRecipes: req.body.recipeID}
+                $pull: {Recipe: req.body.recipeID}
               })
                 .then(res.send(false))
 
@@ -90,6 +90,25 @@ module.exports = {
         //   res.send('error: ' + err)
         // })
       
+      },
+
+      favoritesPage: function(req,res) {
+        console.log('handling favorites page')
+        console.log(req.query)
+
+        db.User.findOne({
+          email: req.query.userEmail 
+        })
+          .populate("Recipe")
+          .then(function(dbUser) {
+            
+            console.log(dbUser)
+            res.send(dbUser.Recipe)
+
+          }).catch(err => res.status(422).json(err));
+
+
+
       }
  
 

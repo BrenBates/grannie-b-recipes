@@ -5,7 +5,10 @@ const Schema = mongoose.Schema;
 const schemaRecipe = new Schema( 
     {
         email: {type: String, required: true},
-        favRecipes: [{type: String}]
+        Recipe: [{
+            type: Schema.Types.ObjectId,
+            ref: "Recipe"    
+        }]
     }
 );
 

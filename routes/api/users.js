@@ -11,6 +11,9 @@ router.route("/favorites")
   .get(usersController.pullUserFavorites)
   .post(usersController.handleUserFavorite)
 
+router.route("/favoritespage")
+  .get(usersController.favoritesPage)
+
 // Matches with "/api/houses/:id"
 // router
 //   .route("/:id")
