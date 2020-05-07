@@ -9,7 +9,7 @@ const usersController = require("../../controllers/usersController");
   //Matches with "/api/houses/savehouse/:id"
 router.route("/favorites")
   .get(usersController.pullUserFavorites)
-  .post(usersController.createUserFavorite)
+  .post(usersController.handleUserFavorite)
 
 // Matches with "/api/houses/:id"
 // router

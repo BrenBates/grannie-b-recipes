@@ -24,6 +24,7 @@ function RecipeDetail(props) {
         pullUserFavorites()
     },[]);
 
+
     const pullRecipe = () => {
 
         let queryURL = "/api/recipes/" + props.match.params.id
@@ -38,7 +39,32 @@ function RecipeDetail(props) {
     }
 
     const pullUserFavorites = () => {
-        console.log('pulling user favorites')
+
+        //Pull the user favorites and compare if the current recipe is in the user favorites list.  If it isn't, then set false to the state hook userFavorite.  
+        //if it is, set user favorite to true.
+
+        if(user) {
+
+            console.log('pulling user favorites')
+
+            let queryURL = "/api/users/favorites"
+
+            axios.get(queryURL, {
+                params: {
+                    recipeID: props.match.params.id,
+                    userEmail: user.email
+                }
+            })
+                .then(result => {
+                    console.log('this is the result')
+                    console.log(result.data)
+                    if (result.data === true) {
+                        setUserFavorite(true)
+                    }
+                   
+                })
+        }
+
     }
 
     const toggleUserFavorite = () => {
@@ -56,7 +82,13 @@ function RecipeDetail(props) {
 
             })
                 .then(result => {
-                    console.log(result)
+                    console.log('this is the result')
+                    console.log(result.data) 
+                    if(result.data === true) {
+                        setUserFavorite(true)
+                    } else if (result.data === false) {
+                        setUserFavorite(false)
+                    }
                 });
 
         }

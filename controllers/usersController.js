@@ -4,20 +4,84 @@ const db = require("../models");
 module.exports = {
 
   pullUserFavorites: function(req, res) {
-    console.log('pull user favorites');
 
-      db.User
-        .find({})
-        .sort({date:-1})
-        .then(dbModel => {res.json(dbModel)})
+    //This function runs when the recipe detail page is first loaded up with an active user.
+    //It sets into the state a true or false value if that recipe is one of the users favorites.
+
+
+    db.User.findOne({
+      email: req.query.userEmail 
+    })
+        .then(dbModel => {
+
+          let fav = false
+
+
+          for(let i=0; i < dbModel.favRecipes.length; i++) {
+            if(dbModel.favRecipes[i] === req.query.recipeID) {
+              fav = true
+            }
+          }
+    
+          res.send(fav)
+
+
+        })
         .catch(err => res.status(422).json(err));
   
 
     },
 
-    createUserFavorite: function(req,res) {
-        console.log('create user favorite')
-        console.log(req.body)
+    handleUserFavorite: function(req,res) {
+        console.log('handling user favorite')
+
+
+        db.User.findOne({
+          email: req.body.userEmail 
+        })
+          .then(function(dbUser) {
+
+
+             //If a user is not found, need to create that user and go ahead and add the new favorite recipe.
+
+            if(!dbUser) {
+
+              db.User.create({
+                email: req.body.userEmail,
+                favRecipes: req.body.recipeID
+              })
+               .then(newUser => {res.send(true)})
+               .catch(err => res.status(422).json(err));
+
+            }
+
+            //If a user is found and it is not already a favorite.  Need to add to favorites and return a true.
+
+            if(dbUser && req.body.favorite===false) {
+
+              db.User.updateOne({
+                dbUser,
+                $push: {favRecipes: req.body.recipeID}
+              })
+              .then(res.send(true))
+
+            }
+
+             //If a user is found and it is already a favorite.  Need to remove from favorites and return a false
+
+            if(dbUser && req.body.favorite===true) {
+
+              console.log('here')
+
+              db.User.updateOne({
+                dbUser,
+                $pull: {favRecipes: req.body.recipeID}
+              })
+                .then(res.send(false))
+
+            }
+
+          })
     
         // db.User
         // .findOne(req.body)
