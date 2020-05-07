@@ -10,6 +10,7 @@ import RecipesCard from "../../components/RecipesCard/recipescard";
 import Wrapper from "../../components/Wrapper/index";
 import Pagination from '../../components/Pagination';
 import { useAuth0 } from "../../react-auth0-spa";
+import { MdFavorite, MdFavoriteBorder } from "react-icons/md"
 
 
 function Favorites() {
@@ -68,9 +69,18 @@ const renderRecipes = () => {
         />
         )
     )
+  } else {
+    return (
+      <>
+        <h3>
+         You have no favorited recipes.  Open a recipe and click on the '<MdFavoriteBorder/>' to add it to your favorites list!
+        </h3>
+      </>
+    )
   }
 
 }
+
 
 
   return (
