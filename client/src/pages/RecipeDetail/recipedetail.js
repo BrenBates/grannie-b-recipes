@@ -9,15 +9,19 @@ import {
     ListGroup
   } from 'reactstrap';
 import Wrapper from "../../components/Wrapper/index";
-
+import { MdFavorite, MdFavoriteBorder } from "react-icons/md"
+import { useAuth0 } from "../../react-auth0-spa";
 
 function RecipeDetail(props) {
 
+    const { user } = useAuth0();
     const [recipe,setRecipe] = useState({})
+    const [userFavorite, setUserFavorite] = useState(false)
     const [ingredientArray,setIngredientArray] = useState([])
-
+    
     useEffect(() => {
         pullRecipe()
+        pullUserFavorites()
     },[]);
 
     const pullRecipe = () => {
@@ -32,6 +36,32 @@ function RecipeDetail(props) {
             });
 
     }
+
+    const pullUserFavorites = () => {
+        console.log('pulling user favorites')
+    }
+
+    const toggleUserFavorite = () => {
+        console.log('toggling user favorite') 
+        console.log(user)
+
+
+            let queryURL = "/api/users/favorites"
+
+            axios.post(queryURL, {
+    
+                recipeID: props.match.params.id,
+                userEmail: user.email,
+                favorite: userFavorite
+
+            })
+                .then(result => {
+                    console.log(result)
+                });
+
+        }
+
+    
 
     const ingredients = data => {
         
@@ -65,15 +95,43 @@ function RecipeDetail(props) {
       
     }
 
+    const renderFavorite = () => {
+    
+    if(user) {
+
+        if(userFavorite === false) {
+            return (
+                <MdFavoriteBorder/>
+            )
+        } else {
+            return (
+                <MdFavorite/>
+            )
+        }
+
+    }
+       
+    }
+
 
     return ( <>
 
     <Row>  
-        <Col sm="4">
+        <Col sm="6">
             <Card className="recipeDetailCard" body inverse style={{ backgroundColor: '#aaaaaa', borderColor: '#5d2906' }}> 
-            <h3>{recipe.title}</h3>
+            <h3>
+                {recipe.title + '  '}
+                <button className="favButton" onClick={() => toggleUserFavorite()}>
+                 {renderFavorite()}
+                </button>
+               
+            </h3>
+            
+            
             </Card>
         </Col>
+
+
     </Row>
         
         <Row>
