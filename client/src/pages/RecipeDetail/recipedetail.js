@@ -4,6 +4,11 @@ import axios from 'axios';
 import {
     Card,
     Container,
+    Button,
+    Modal,
+    ModalHeader,
+    ModalBody,
+    ModalFooter,
     Row,
     Col,
     ListGroup
@@ -19,6 +24,9 @@ function RecipeDetail(props) {
     const [recipe,setRecipe] = useState({})
     const [userFavorite, setUserFavorite] = useState(false)
     const [ingredientArray,setIngredientArray] = useState([])
+    const [deleteModal, setDeleteModal] = useState(false);
+
+  const toggleDeleteModal = () => setDeleteModal(!deleteModal);
     
     useEffect(() => {
         pullRecipe()
@@ -38,6 +46,7 @@ function RecipeDetail(props) {
             });
 
     }
+
 
     const pullUserFavorites = () => {
 
@@ -163,7 +172,24 @@ function RecipeDetail(props) {
                         <Card className="recipeDetailCard" body inverse style={{ backgroundColor: '#aaaaaa', borderColor: '#5d2906' }}> 
 
                           <button>Edit Recipe</button>
-                          <button>Delete Recipe</button>
+                         
+                        
+                          {/* Delete Button Modal */}
+                          <Button color="danger" onClick={toggleDeleteModal}>Delete</Button>
+                          <Modal isOpen={deleteModal} toggle={toggleDeleteModal} className="deleteModal">
+                            <ModalHeader toggle={toggleDeleteModal}>Delete Recipe</ModalHeader>
+                            <ModalBody>
+                                Do you wish to permanently delete this recipe?
+                            </ModalBody>
+                            <ModalFooter>
+                              <Button color="danger" onClick={() => console.log('hello')}>Yes</Button>{' '}
+                              <Button color="secondary" onClick={toggleDeleteModal}>No</Button>
+                            </ModalFooter>
+                          </Modal>
+
+
+
+
 
                         </Card>
 

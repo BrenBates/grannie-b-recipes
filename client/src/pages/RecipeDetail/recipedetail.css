@@ -12,3 +12,9 @@
     text-decoration: none;
     border: none;
 }
+
+
+ .modal-content {
+    background-color: #aaaaaa !important;
+    border-color: #5d2906 !important;
+}
