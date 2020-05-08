@@ -9,6 +9,7 @@ import {
     ListGroup
   } from 'reactstrap';
 import Wrapper from "../../components/Wrapper/index";
+import Can from "../../components/Can";
 import { MdFavorite, MdFavoriteBorder } from "react-icons/md"
 import { useAuth0 } from "../../react-auth0-spa";
 
@@ -94,7 +95,6 @@ function RecipeDetail(props) {
         }
 
     
-
     const ingredients = data => {
         
             let ingredientArray = []
@@ -145,6 +145,46 @@ function RecipeDetail(props) {
        
     }
 
+    const renderAdminPanel = () => {
+
+        if(user) {
+
+   
+        return (
+
+          
+           
+                <Can
+                role= {user["https://grannie-b/role"]}
+                perform="recipes:edit"
+                yes={() => (
+                    <>
+                        <Col sm="4">
+                        <Card className="recipeDetailCard" body inverse style={{ backgroundColor: '#aaaaaa', borderColor: '#5d2906' }}> 
+
+                          <button>Edit Recipe</button>
+                          <button>Delete Recipe</button>
+
+                        </Card>
+
+                        </Col>
+                
+                    </>
+                    
+                )}
+            
+                />
+
+
+          
+
+
+          
+        )
+
+    }
+    }
+
 
     return ( <>
 
@@ -162,6 +202,8 @@ function RecipeDetail(props) {
             
             </Card>
         </Col>
+
+        {renderAdminPanel()}
 
 
     </Row>
