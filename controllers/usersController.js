@@ -25,12 +25,9 @@ module.exports = {
            let recipeQuery = req.query.recipeID
            let recipeDB = dbModel.Recipe[i].toString()
 
-          console.log(recipeQuery)
-          console.log(recipeDB)
         
             if(recipeDB == recipeQuery) {
              
-              console.log('hello')
               fav=true;
 
             }
@@ -66,7 +63,9 @@ module.exports = {
                 email: req.body.userEmail,
                 Recipe: req.body.recipeID
               })
-               .then(newUser => {res.send(true)})
+               .then(newUser => {
+                console.log('created this new')
+                res.send(true)})
                .catch(err => res.status(422).json(err));
 
             }
@@ -75,11 +74,10 @@ module.exports = {
 
             if(dbUser && req.body.favorite===false) {
 
-              db.User.updateOne({
-                dbUser,
-                $push: {Recipe: req.body.recipeID}
-              })
-              .then(res.send(true))
+              db.User.updateOne(
+                {"email": req.body.userEmail},
+                {$push: {"Recipe": req.body.recipeID}}
+                ).then(res.send(true))
 
             }
 
@@ -89,11 +87,10 @@ module.exports = {
 
               console.log('here')
 
-              db.User.updateOne({
-                dbUser,
-                $pull: {Recipe: req.body.recipeID}
-              })
-                .then(res.send(false))
+              db.User.updateOne(
+                {"email": req.body.userEmail},
+                {$pull: {"Recipe": req.body.recipeID}}
+                ).then(res.send(false))
 
             }
 
@@ -119,6 +116,7 @@ module.exports = {
           .then(function(dbUser) {
             
             console.log(dbUser)
+           
             res.send(dbUser.Recipe)
 
           }).catch(err => res.status(422).json(err));
