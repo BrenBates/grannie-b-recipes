@@ -30,7 +30,15 @@ const NavBar = (props) => {
 
     <div className="ml-auto">
       {!user && (
+
+        <>
         <button onClick={() => loginWithRedirect({})}>Log in</button>
+
+        <Link to={"/about"}>
+          <button>About</button>
+        </Link>
+        </>
+        
       )}
 
       {user && (
