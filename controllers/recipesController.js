@@ -43,6 +43,15 @@ module.exports = {
       res.send('error: ' + err)
     })
   
+  },
+
+  deleteRecipe: function(req,res) {
+    console.log('deleting recipe')
+    console.log(req.query.recipeID)
+    db.Recipe
+      .deleteOne({"_id": req.query.recipeID})
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
   }
 
 };

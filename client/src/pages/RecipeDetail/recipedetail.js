@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
-import './recipedetail.css'
+import { Link } from "react-router-dom";
+import './recipedetail.css';
 import axios from 'axios';
 import {
     Card,
@@ -49,6 +50,17 @@ function RecipeDetail(props) {
 
     const deleteRecipe = () => {
         console.log('goodbye world')
+
+
+        axios.get("/api/recipes/delete", {
+            params: {
+                recipeID: props.match.params.id
+            }
+        }).then(result => {
+            console.log(result)
+        })
+
+
     }
 
 
@@ -179,14 +191,18 @@ function RecipeDetail(props) {
                          
                         
                           {/* Delete Button Modal */}
+                         
                           <Button color="danger" onClick={toggleDeleteModal}>Delete</Button>
+                         
                           <Modal isOpen={deleteModal} toggle={toggleDeleteModal} className="deleteModal">
                             <ModalHeader toggle={toggleDeleteModal}>Delete Recipe</ModalHeader>
                             <ModalBody>
                                 Do you wish to permanently delete this recipe?
                             </ModalBody>
                             <ModalFooter>
-                              <Button color="danger" onClick={() => deleteRecipe}>Yes</Button>{' '}
+                            <Link to={"/"}>
+                              <Button color="danger" onClick={() => deleteRecipe()}>Yes</Button>{' '}
+                            </Link>
                               <Button color="secondary" onClick={toggleDeleteModal}>No</Button>
                             </ModalFooter>
                           </Modal>
