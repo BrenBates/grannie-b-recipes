@@ -47,6 +47,10 @@ function RecipeDetail(props) {
 
     }
 
+    const deleteRecipe = () => {
+        console.log('goodbye world')
+    }
+
 
     const pullUserFavorites = () => {
 
@@ -182,7 +186,7 @@ function RecipeDetail(props) {
                                 Do you wish to permanently delete this recipe?
                             </ModalBody>
                             <ModalFooter>
-                              <Button color="danger" onClick={() => console.log('hello')}>Yes</Button>{' '}
+                              <Button color="danger" onClick={() => deleteRecipe}>Yes</Button>{' '}
                               <Button color="secondary" onClick={toggleDeleteModal}>No</Button>
                             </ModalFooter>
                           </Modal>
