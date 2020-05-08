@@ -9,9 +9,7 @@ const rules = {
     visitor: {
       static: [
         "posts:list", 
-        "home-page:visit",
-        "recipes:edit",
-        "blogs:edit"
+        "home-page:visit"
       ]
     },
     writer: {
