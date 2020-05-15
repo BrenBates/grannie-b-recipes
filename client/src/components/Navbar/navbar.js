@@ -37,6 +37,10 @@ const NavBar = (props) => {
         <Link to={"/about"}>
           <button>About</button>
         </Link>
+
+        <Link to={"/"}>
+          <button>Home</button>
+        </Link>
         </>
         
       )}
