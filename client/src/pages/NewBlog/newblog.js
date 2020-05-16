@@ -10,87 +10,41 @@ import {
     FormGroup,
     Label
   } from 'reactstrap';
-import Navbar from "../../components/Navbar/navbar";
-import ImageUpload from '../../components/ImageUpload';
+
+
 
 function NewBlog(props) {
-    
-  
-    //text input for Formik form
-    const MyTextInput = ({ label, ...props }) => {
-      // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
-      // which we can spread on <input> and alse replace ErrorMessage entirely.
-      const [field, meta] = useField(props);
-      return (
-        <FormGroup>
-          <Label className="label-login" for={props.id || props.name}>{label}</Label>
-          <input className="text-input" {...field} {...props} />
-          {meta.touched && meta.error ? (
-            <div className="error">{meta.error}</div>
-          ) : null}
-        </FormGroup>
-      );
-    };
-  
-    return (
-      <Container>
-        <Formik
-          initialValues={{
-            title: "",
-            ingredients: "",
-            instructions: "",
-            background: ""
-          }}
-          validationSchema={Yup.object({
-            title: Yup.string()
-              .required("Required"),
-            ingredients: Yup.string()
-              .required('Required'),
-            instructions: Yup.string()
-              .required('Required'),
-          })}
-          onSubmit={(values, { setSubmitting }) => {
-  
-            console.log(values)
-  
-    
-          }}
-        >
-          <Form>
-            <div className="margin-top-login" />
-            <MyTextInput
-              label="Title"
-              name="title"
-              type="text"
-              placeholder="insert a title for the recipe"
-            />
-            <MyTextInput
-              label="Ingredients"
-              name="ingredients"
-              type="text"
-              placeholder="insert ingredients list"
-            />
-            <MyTextInput
-            label="Instructions"
-            name="instructions"
-            type="text"
-            placeholder="insert recipe instructions"
-          />
-          <MyTextInput
-          label="Background"
-          name="background"
-          type="text"
-          placeholder="insert recipe background (optional)"
-        />
-  
-            <button type="submit">Submit</button>
-          </Form>
-        </Formik>
-  
-        {/* {props.isError && <Error>{props.errorText}</Error>} */}
 
-        </Container>
-    );
-  }
+const [selector, setSelector] = useState('');
+const [blogItem, newBlogItem] = useState([]);
+
+const handleClick = value => {
+  console.log(value)
+}
+
+return (
+
+  <>
+
+  <button onClick={() => handleClick('h1')}>h1</button>
+  <button value="h2">h2</button>
+  <button value="h3">h3</button>
+  <button value="h4">h4</button>
+  <button value="h5">h5</button>
+  <button value="h6">h6</button>
+  <button value="ul">Bullet List</button>
+  <button value="ol">Numbered List</button>
+  <button value="li">List Item</button>
+  <button value="p">Paragraph</button>
+
+
+
+
+  </>
+
+)
+    
+}
+
   
   export default NewBlog;
