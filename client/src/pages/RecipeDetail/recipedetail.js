@@ -293,9 +293,20 @@ function RecipeDetail(props) {
             
            
                 {/* Edit Ingredients Modal */}
-                         
-                <Button onClick={toggleIngredientModal}><FaEdit /></Button>
-                         
+
+                {user ? 
+                 <Can
+                 role= {
+                     user["https://grannie-b/role"]}
+                 perform="recipes:edit"
+                 yes={() => (
+                     <Button onClick={toggleIngredientModal}><FaEdit /></Button>
+                 )}/>
+                 :
+                 <></>
+                }
+               
+        
                          <Modal isOpen={ingredientModal} toggle={toggleIngredientModal} className="ingredientModal">
                            <ModalHeader toggle={toggleIngredientModal}>Edit Ingredients</ModalHeader>
                            <ModalBody>                              
@@ -357,8 +368,22 @@ function RecipeDetail(props) {
 
 
                {/* Edit Instructions Modal */}
-                         
-               <Button onClick={toggleInstructionModal}><FaEdit /></Button>
+
+               {user ?
+
+                    <Can
+                    role= {user["https://grannie-b/role"]}
+                    perform="recipes:edit"
+                    yes={() => (
+                        <Button onClick={toggleInstructionModal}><FaEdit /></Button>
+                    )}/>
+               
+                    :
+                    <></>
+            
+                }
+
+ 
                          
                          <Modal isOpen={instructionModal} toggle={toggleInstructionModal} className="instructionModal">
                            <ModalHeader toggle={toggleInstructionModal}>Edit Instructions</ModalHeader>
@@ -387,8 +412,22 @@ function RecipeDetail(props) {
             <Card className="recipeDetailCard" body inverse style={{ backgroundColor: '#aaaaaa', borderColor: '#5d2906' }}>
 
                  {/* Edit Picture Modal */}
+
+                 {user ?
+                   <Can
+                   role= {user["https://grannie-b/role"]}
+                   perform="recipes:edit"
+                   yes={() => (
+                       <Button onClick={togglePictureModal}><FaEdit /></Button>
+                   )}/>
+                   : <></>
+                 
+                }
+
+               
+                
                          
-               <Button onClick={togglePictureModal}><FaEdit /></Button>
+               
                          
                          <Modal isOpen={pictureModal} toggle={togglePictureModal} className="pictureModal">
                            <ModalHeader toggle={togglePictureModal}>Edit Pictures</ModalHeader>
