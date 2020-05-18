@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import * as Yup from "yup";
 import { Formik, Form, useField } from "formik";
+import BlogList from "../../components/BlogList/bloglist";
 import {
     Container,
     Row,
@@ -29,6 +30,8 @@ useEffect(() => {
 },[selector]);
 
 useEffect(() => {
+  console.log('list count updated')
+  console.log(listCount)
   renderList()
 },[listCount]);
 
@@ -61,11 +64,23 @@ const renderSelection = (list) =>  {
 
 
 const renderList = () => {
+  let listArray = [];
   for(let i = 0; i < listCount; i++) {
-    return (
-      <li><textarea></textarea></li>
-    )
+      let arrItem = <li id={'list '+ i}><textarea>{i}</textarea></li>
+      listArray.push(arrItem)
   }
+
+  console.log('this is the list array')
+  console.log(listArray)
+
+  listArray.map(item => {
+    return (
+      <>
+      
+      </>
+    )
+
+  })
 }
 
 
