@@ -12,12 +12,17 @@ import {
     ModalFooter,
     Row,
     Col,
+    FormGroup,
+    Label,
     ListGroup
   } from 'reactstrap';
 import Wrapper from "../../components/Wrapper/index";
 import Can from "../../components/Can";
 import { MdFavorite, MdFavoriteBorder } from "react-icons/md"
+import { FaEdit } from "react-icons/fa";
 import { useAuth0 } from "../../react-auth0-spa";
+import * as Yup from "yup";
+import { Field, Formik, Form, useField } from "formik";
 
 function RecipeDetail(props) {
 
@@ -25,14 +30,41 @@ function RecipeDetail(props) {
     const [recipe,setRecipe] = useState({})
     const [userFavorite, setUserFavorite] = useState(false)
     const [ingredientArray,setIngredientArray] = useState([])
+    const [ingredientValues,setIngredientValues] = useState('')
     const [deleteModal, setDeleteModal] = useState(false);
+    const [ingredientModal, setIngredientModal] = useState(false);
+    const [instructionModal, setInstructionModal] = useState(false);
+    const [pictureModal, setPictureModal] = useState(false);
 
   const toggleDeleteModal = () => setDeleteModal(!deleteModal);
+  const toggleIngredientModal = () => setIngredientModal(!ingredientModal);
+  const toggleInstructionModal = () => setInstructionModal(!instructionModal);
+  const togglePictureModal = () => setPictureModal(!pictureModal);
+
+  //text inputs for Formik form
+
+  const TextInput = ({ label, ...props }) => {
+    // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
+    // which we can spread on <input> and alse replace ErrorMessage entirely.
+    const [field, meta] = useField(props);
+    return (
+      <FormGroup>
+        <Label className="label-login" for={props.id || props.name}>{label}</Label>
+        <br/>
+        <textarea className="text-input" {...field} {...props} />
+        {meta.touched && meta.error ? (
+          <div className="error">{meta.error}</div>
+        ) : null}
+      </FormGroup>
+    );
+  };
+
+  //use effect for page load
     
     useEffect(() => {
         pullRecipe()
         pullUserFavorites()
-    },[]);
+    },[ingredientValues]);
 
 
     const pullRecipe = () => {
@@ -138,12 +170,14 @@ function RecipeDetail(props) {
             }
 
             setIngredientArray(ingredientArray)
+            setIngredientValues(ingredientArray.map((item,index) => (item)).join(''))
 
         
     }
 
-    const renderIngredients = () => {
 
+
+    const renderIngredients = (type) => {
             return (
                 ingredientArray.map((item,index) => 
                     <p key={index}>{item}</p>
@@ -186,13 +220,10 @@ function RecipeDetail(props) {
                     <>
                         <Col sm="4">
                         <Card className="recipeDetailCard" body inverse style={{ backgroundColor: '#aaaaaa', borderColor: '#5d2906' }}> 
-
-                          <button>Edit Recipe</button>
-                         
                         
                           {/* Delete Button Modal */}
                          
-                          <Button color="danger" onClick={toggleDeleteModal}>Delete</Button>
+                          <Button color="danger" onClick={toggleDeleteModal}>Delete Recipe</Button>
                          
                           <Modal isOpen={deleteModal} toggle={toggleDeleteModal} className="deleteModal">
                             <ModalHeader toggle={toggleDeleteModal}>Delete Recipe</ModalHeader>
@@ -259,6 +290,62 @@ function RecipeDetail(props) {
             <Col sm="12" md="6">
                 
             <Card className="recipeDetailCard" body inverse style={{ backgroundColor: '#aaaaaa', borderColor: '#5d2906' }}>
+            
+           
+                {/* Edit Ingredients Modal */}
+                         
+                <Button onClick={toggleIngredientModal}><FaEdit /></Button>
+                         
+                         <Modal isOpen={ingredientModal} toggle={toggleIngredientModal} className="ingredientModal">
+                           <ModalHeader toggle={toggleIngredientModal}>Edit Ingredients</ModalHeader>
+                           <ModalBody>                              
+                                <Formik
+                                initialValues={{
+                                    ingredients: ingredientValues
+                                }}
+                                validationSchema={Yup.object({
+                                    ingredients: Yup.string()
+                                    .required("Required"),
+                                })}
+                                onSubmit={(values, { setSubmitting }) => {
+
+                                      let payload = {
+                                        recipeID: props.match.params.id,
+                                        ingredients: values.ingredients
+                                      }
+                        
+                                    console.log(payload)
+
+                                    axios.put("/api/recipes", payload).then(result => {
+                                      console.log('this is the axios result')
+                                      console.log(result)
+                                      toggleIngredientModal()
+                                      setIngredientValues(result.data)
+                                      
+        
+                                    })
+                        
+                            
+                                }}
+                                >
+                                <Form>
+                                    <div className="margin-top-login" />
+
+                                    <TextInput
+                                    label="Ingredients:"
+                                    name="ingredients"
+                                    type="text"
+                                    placeholder="Insert ingredients list"
+                                    />
+
+                                    <button type="submit">Submit</button>
+                                    <button onClick={toggleIngredientModal}>Cancel</button>
+                                </Form>
+                                </Formik>
+                           </ModalBody>
+                         </Modal>
+
+
             {renderIngredients()}
             </Card>
 
@@ -267,19 +354,60 @@ function RecipeDetail(props) {
          <Col sm="12" md="6">
 
         <Card className="recipeDetailCard" body inverse style={{ backgroundColor: '#aaaaaa', borderColor: '#5d2906' }}>
+
+
+               {/* Edit Instructions Modal */}
+                         
+               <Button onClick={toggleInstructionModal}><FaEdit /></Button>
+                         
+                         <Modal isOpen={instructionModal} toggle={toggleInstructionModal} className="instructionModal">
+                           <ModalHeader toggle={toggleInstructionModal}>Edit Instructions</ModalHeader>
+                           <ModalBody>
+                               {recipe.instructions}
+                               {recipe.background}
+                           </ModalBody>
+                           <ModalFooter>
+                        
+                             <Button color="secondary" onClick={toggleInstructionModal}>Submit</Button>
+                           </ModalFooter>
+                         </Modal>
+
        
                 {recipe.instructions}
                 <br/>
                 {recipe.background}
                 <br/>
-
-                <Wrapper>
-                    <img className="recipeDetailImage" src={recipe.recipeImageURL}></img>
-                 </Wrapper>
           
 
          </Card>
          </Col>
+
+
+         <Col sm="12" md="6">
+            <Card className="recipeDetailCard" body inverse style={{ backgroundColor: '#aaaaaa', borderColor: '#5d2906' }}>
+
+                 {/* Edit Picture Modal */}
+                         
+               <Button onClick={togglePictureModal}><FaEdit /></Button>
+                         
+                         <Modal isOpen={pictureModal} toggle={togglePictureModal} className="pictureModal">
+                           <ModalHeader toggle={togglePictureModal}>Edit Pictures</ModalHeader>
+                           <ModalBody>
+                               
+                           </ModalBody>
+                           <ModalFooter>
+                        
+                             <Button color="secondary" onClick={togglePictureModal}>Submit</Button>
+                           </ModalFooter>
+                         </Modal>
+
+
+
+                <Wrapper>
+                    <img className="recipeDetailImage" src={recipe.recipeImageURL}></img>
+                 </Wrapper>
+            </Card>
+        </Col>
       
     </Row>
         </>

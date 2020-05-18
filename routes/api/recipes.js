@@ -10,6 +10,7 @@ router.route("/delete")
 router.route("/")
   .get(recipesController.pullRecipes)
   .post(recipesController.createRecipe)
+  .put(recipesController.updateRecipe)
 
 
   //Matches with "/api/houses/savehouse/:id"

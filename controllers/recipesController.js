@@ -52,6 +52,40 @@ module.exports = {
       .deleteOne({"_id": req.query.recipeID})
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
+  },
+
+  updateRecipe: function(req,res) {
+
+    //if update is for ingredients
+
+    if(req.body.ingredients) {
+
+      db.Recipe.findOneAndUpdate(
+        {_id: req.body.recipeID},
+        {ingredients: req.body.ingredients}
+        )
+      .then(dbRecipe => res.json(dbRecipe))
+      .catch(err => res.status(422).json(err))
+
+    }
+
+     //if update is for instructions
+
+     if(req.body.instructions) {
+
+      db.Recipe.findOneAndUpdate(
+        {_id: req.body.recipeID},
+        {instructions: req.body.instructions}
+        )
+      .then(dbRecipe => console.log(dbRecipe))
+      .catch(err => res.status(422).json(err))
+
+    }
+
+     
+    
+   
+    
   }
 
 };
